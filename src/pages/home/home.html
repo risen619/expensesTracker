@@ -1,17 +1,45 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Add Expense</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+    <div style="margin-top: 25vh;">
+        <form (ngSubmit)="addExpense()" [formGroup]="form" novalidate>
+            <ion-list padding>
+                <ion-item no-lines no-padding>
+                    <ion-label color="primary" stacked>Name: </ion-label>
+                    <ion-input formControlName="expenseName" placeholder="Expense name here..."></ion-input>
+                </ion-item>
+            
+                <ion-item no-lines no-padding>
+                    <ion-label color="primary" stacked>Category: </ion-label>
+                    <ion-input formControlName="expenseCategory" (input)="handleInput()" placeholder="Category name here...">
+                    </ion-input>
+                </ion-item>
+                <ion-list no-padding>
+                    <ion-item *ngIf="category.value != '' && filteredCategories.length === 0 && !categoryChosen">
+                        <button ion-button color="primary" tappable (click)="addCategory(category.value)">
+                            Add This Category
+                        </button>
+                    </ion-item>
+                    <ion-item *ngFor="let i of filteredCategories" (click)="chooseCategory(i)" no-lines>
+                        {{ i }}
+                    </ion-item>
+                </ion-list>
+            
+                <ion-item no-lines no-padding>
+                    <ion-label color="primary">Amount: </ion-label>
+                    <ion-input formControlName="expenseAmount" type="number" placeholder="How much you spent...">
+                    </ion-input>
+                    <button ion-button item-right outline class="currency-button" (click)="currencyCheck()">UAH</button>
+                </ion-item>
+                <button color="primary" type="submit" text-center ion-item>Add Expense</button>
+            </ion-list>
+        </form>
+    </div>
+    <div>
+        {{ expenses | json }}
+    </div>
 </ion-content>
