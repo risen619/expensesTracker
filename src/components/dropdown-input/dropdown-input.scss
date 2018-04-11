@@ -1,0 +1,28 @@
+dropdown-input {
+    & > div {
+        position: relative;
+    }
+
+    .dropdown {
+        border: 1px solid #dedede;
+        border-top: 0;
+        box-shadow: 1px 1px 1px 1px #dadada;
+        left: 0;
+        padding-top: 1px;
+        position: absolute;
+        right: 0;
+        width: initial;
+        z-index: 2500;
+
+        button.item-md .item-inner {
+            padding-left: $item-md-padding-left;
+        }
+        button.item-ios .item-inner {
+            padding-left: $item-ios-padding-left;
+        }
+        button.item-wp .item-inner {
+            padding-left: $item-wp-padding-left;
+        }
+
+    }
+}

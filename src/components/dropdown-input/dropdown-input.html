@@ -1,0 +1,16 @@
+<div [class.padding-x]="horizontalPadding">
+    <ion-item no-lines no-padding>
+        <ion-label *ngIf="label != undefined && label.trim() != ''" color="primary" stacked>{{ label }}</ion-label>
+        <ion-input [(ngModel)]="query" [placeholder]="placeholder"
+            (ionBlur)="handleBlur()" (ionFocus)="handleFocus()" (ionChange)="handleInput($event)"></ion-input>
+    </ion-item>
+    <div></div>
+    <ion-list class="dropdown" *ngIf="filteredItems.length > 0">
+        <button ion-item tappable (click)="handleClick(i)" *ngFor="let i of filteredItems" no-padding>
+            {{ i }}
+        </button>
+    </ion-list>
+    <div *ngIf="noMatches">
+        <ng-content></ng-content>
+    </div>
+</div>
